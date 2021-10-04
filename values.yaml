@@ -16,10 +16,12 @@ env:
   GITLAB_OAUTH_CLIENT_ID: ""
   GITLAB_OAUTH_SECRET: ""
 
+clusterdns: "svc.cluster.local"
+
 sdlc:
   repository: "finos/legend-sdlc-server"
   tag: "0.24.0"
-  port: 
+  port: "7070"
   type: ClusterIP
   env:
   pullPolicy: IfNotPresent
@@ -27,7 +29,7 @@ sdlc:
 engine:
   repository: "finos/legend-engine-server"
   tag: "2.21.0"
-  port: 
+  port: "6060"
   type: ClusterIP
   env:
   pullPolicy: IfNotPresent
@@ -35,18 +37,17 @@ engine:
 studio:
   repository: "finos/legend-studio"
   tag: "0.2.16"
-  port: 
+  port: "7070"
   type: ClusterIP
-  env:
+  env: "8080"
   pullPolicy: IfNotPresent
 
 mongo:
   repository: "mongo"
   tag: "4.0"
-  port: 
+  port: 27017
   type: ClusterIP
   env:
-    MONGO_PORT: 27017
     MONGO_USER: "admin"
     MONGO_PASSWORD: "admin"
   pullPolicy: IfNotPresent

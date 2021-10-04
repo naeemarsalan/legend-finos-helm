@@ -1,6 +1,6 @@
 apiVersion: v2
 name: legend
-description: Deploy FINOS Legend
+description: Deploy FINOS Legend with Remote GitLab
 
 # A chart can be either an 'application' or a 'library' chart.
 #

@@ -10,12 +10,45 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+env:
+  GITLAB_URL: "gitlab.com"
+  LEGEND_HOST: ""
+  GITLAB_OAUTH_CLIENT_ID: ""
+  GITLAB_OAUTH_SECRET: ""
+
 sdlc:
-  repository:
-  tag: ""
+  repository: "finos/legend-sdlc-server"
+  tag: "0.24.0"
   port: 
   type: ClusterIP
   env:
+  pullPolicy: IfNotPresent
+
+engine:
+  repository: "finos/legend-engine-server"
+  tag: "2.21.0"
+  port: 
+  type: ClusterIP
+  env:
+  pullPolicy: IfNotPresent
+
+studio:
+  repository: "finos/legend-studio"
+  tag: "0.2.16"
+  port: 
+  type: ClusterIP
+  env:
+  pullPolicy: IfNotPresent
+
+mongo:
+  repository: "mongo"
+  tag: "4.0"
+  port: 
+  type: ClusterIP
+  env:
+    MONGO_PORT: 27017
+    MONGO_USER: "admin"
+    MONGO_PASSWORD: "admin"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

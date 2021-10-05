@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "legend.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ .Values.env.LEGEND_HOST }}:{{ .Values.studio.port }}']
   restartPolicy: Never

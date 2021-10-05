@@ -79,8 +79,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.engine.repository }}:{{ .Values.engine.tag }}"
           imagePullPolicy: {{ .Values.engine.pullPolicy }}
-          command: ["sleep"]
-          args: ["1000"]
+          command: ["/scripts/run-engine.sh"]
+          # command: ["sleep"]
+          # args: ["1000"]
           envFrom:
           - configMapRef:
               name: {{ include "legend.fullname" . }}-env

@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "legend.fullname" . }}-sdlc
+  name: {{ include "legend.fullname" . }}-studio
   labels:
-    app: sdlc
+    app: studio
     {{- include "legend.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -11,7 +11,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      app: sdlc
+      app: studio
       {{- include "legend.selectorLabels" . | nindent 6 }}
   template:
     metadata:
@@ -20,7 +20,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: sdlc
+        app: studio
         {{- include "legend.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
@@ -35,9 +35,12 @@ spec:
         image: busybox
         command: ['sh', '-c', 'cp /tmp-templates/* /templates/']
         volumeMounts:
-          - mountPath: /tmp-templates/config.yml
-            name: template
-            subPath: config.yml
+          - mountPath: /tmp-templates/uiConfig.json
+            name: uiconfig-template
+            subPath: uiConfig.json
+          - mountPath: /tmp-templates/httpConfig.json
+            name: httpconfig-template
+            subPath: httpConfig.json
           - name: templates
             mountPath: /templates
       - name: copy-config
@@ -46,9 +49,12 @@ spec:
         volumeMounts:
           - name: config
             mountPath: /config
-          - mountPath: /tmp-config/config.yml
-            name: config-yml
-            subPath: config.yml
+          - mountPath: /tmp-config/uiConfig.json
+            name: uiconfig
+            subPath: uiConfig.json
+          - mountPath: /tmp-config/httpConfig.json
+            name: httpconfig
+            subPath: httpConfig.json
       - name: copy-scripts
         image: busybox
         command: ['sh', '-c', 'cp /tmp-scripts/* /scripts/']
@@ -74,12 +80,12 @@ spec:
           - name: scripts
             mountPath: /scripts
       containers:
-        - name: sdlc
+        - name: studio
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.sdlc.repository }}:{{ .Values.sdlc.tag }}"
-          imagePullPolicy: {{ .Values.sdlc.pullPolicy }}
-          command: ["/scripts/run-sdlc.sh"]
+          image: "{{ .Values.studio.repository }}:{{ .Values.studio.tag }}"
+          imagePullPolicy: {{ .Values.studio.pullPolicy }}
+          command: ["/scripts/run-studio.sh"]
           # command: ["sleep"]
           # args: ["1000"]
           envFrom:
@@ -88,8 +94,8 @@ spec:
           # command: ["java"]
           # args: ["-XX:+ExitOnOutOfMemoryError","-Xss4M","-XX:MaxRAMPercentage=60","-Dfile.encoding=UTF8","-cp","/app/bin/*.jar","org.finos.legend.sdlc.server.LegendSDLCServer","server","/config/config.yml"]
           ports:
-            - name: sdlc
-              containerPort: {{ .Values.sdlc.port }}
+            - name: studio
+              containerPort: {{ .Values.studio.port }}
               protocol: TCP
           volumeMounts:
             - mountPath: /gitlab-config/gitlab.env
@@ -103,12 +109,12 @@ spec:
               mountPath: /config
           # livenessProbe:
           #   tcpSocket:
-          #     port: {{ .Values.sdlc.port }}
+          #     port: {{ .Values.studio.port }}
           #   initialDelaySeconds: 30
           #   periodSeconds: 20
           # readinessProbe:
           #   tcpSocket:
-          #     port: {{ .Values.sdlc.port }}
+          #     port: {{ .Values.studio.port }}
           #   initialDelaySeconds: 5
           #   periodSeconds: 20
           resources:
@@ -122,15 +128,33 @@ spec:
         emptyDir: {}
       - configMap:
           items:
-          - key: config.yml
-            path: config.yml
-          name: {{ include "legend.fullname" . }}-sdlc
-        name: config-yml
+          - key: uiConfig.json
+            path: uiConfig.json
+          name: {{ include "legend.fullname" . }}-studio-template
+        name: uiconfig-template
       - configMap:
           items:
-          - key: config.yml
-            path: config.yml
-          name: {{ include "legend.fullname" . }}-sdlc-template
+          - key: httpConfig.json
+            path: httpConfig.json
+          name: {{ include "legend.fullname" . }}-studio-template
+        name: httpconfig-template
+      - configMap:
+          items:
+          - key: uiConfig.json
+            path: uiConfig.json
+          name: {{ include "legend.fullname" . }}-studio
+        name: uiconfig
+      - configMap:
+          items:
+          - key: httpConfig.json
+            path: httpConfig.json
+          name: {{ include "legend.fullname" . }}-studio
+        name: httpconfig
+      - configMap:
+          items:
+          - key: config.json
+            path: config.json
+          name: {{ include "legend.fullname" . }}-studio-template
         name: template
       - configMap:
           items:

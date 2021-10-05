@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "legend.fullname" . }}-engine
   labels:
-    app: sdlc
+    app: engine
     {{- include "legend.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.engine.type }}
@@ -13,4 +13,4 @@ spec:
       protocol: TCP
       name: engine
   selector:
-    {{- include "legend.selectorLabels" . | nindent 4 }}
+    app: engine

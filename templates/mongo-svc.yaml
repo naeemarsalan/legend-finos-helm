@@ -13,4 +13,4 @@ spec:
       protocol: TCP
       name: mongo
   selector:
-    {{- include "legend.selectorLabels" . | nindent 4 }}
+    app: mongo

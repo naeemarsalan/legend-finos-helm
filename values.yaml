@@ -6,7 +6,7 @@ replicaCount: 1
 
 env:
   GITLAB_URL: "gitlab.com"
-  LEGEND_HOST: "34.226.190.28.nip.io"
+  LEGEND_HOST: "54.196.227.87.nip.io"
   GITLAB_OAUTH_CLIENT_ID: "38ad9d7f67567437ec3a637281021f1991d8a4c0e5705347cf81cbba48f54091"
   GITLAB_OAUTH_SECRET: "bb05c6f6f9281c80e20c1688dcfdcd9d043455bd9692f4fb1b5141d0527c3212"
 
@@ -17,7 +17,6 @@ sdlc:
   tag: "0.45.0"
   port: "7070"
   type: ClusterIP
-  env:
   pullPolicy: IfNotPresent
 
 engine:
@@ -25,7 +24,6 @@ engine:
   tag: "2.39.0"
   port: "6060"
   type: ClusterIP
-  env:
   pullPolicy: IfNotPresent
 
 studio:
@@ -33,7 +31,6 @@ studio:
   tag: "0.2.5"
   port: "8080"
   type: ClusterIP
-  env: "8080"
   pullPolicy: IfNotPresent
 
 mongo:
@@ -71,22 +68,6 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-
-ingress:
-  enabled: true
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: 34.226.190.28.nip.io
-      paths:
-        - path: /studio
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

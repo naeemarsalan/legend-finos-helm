@@ -60,7 +60,7 @@ data:
         app:
           id: {{ .Values.env.GITLAB_OAUTH_CLIENT_ID }}
           secret: {{ .Values.env.GITLAB_OAUTH_SECRET }}
-          redirectURI: http://{{ include "legend.fullname" . }}-sdlc.{{ .Release.Namespace }}.{{ .Values.clusterdns}}:{{ .Values.sdlc.port }}/api/auth/callback
+          redirectURI: http://{{ .Values.env.LEGEND_HOST }}/sdlc/api/auth/callback
 
     projectStructure:
       extensionProvider:

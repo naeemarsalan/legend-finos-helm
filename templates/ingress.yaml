@@ -4,16 +4,12 @@ metadata:
   name: {{ include "legend.fullname" . }}
   labels:
     {{- include "legend.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
   rules:
   - host: {{ .Values.env.LEGEND_HOST }}
     http:
       paths:
-      - path: /studio
+      - path: /
         pathType: Prefix
         backend:
           service:

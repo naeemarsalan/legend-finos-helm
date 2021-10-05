@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "legend.fullname" . }}-studio
   labels:
-    app: studio
+    
     {{- include "legend.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.studio.type }}
@@ -13,4 +13,4 @@ spec:
       protocol: TCP
       name: studio
   selector:
-    {{- include "legend.selectorLabels" . | nindent 4 }}
+    app: studio

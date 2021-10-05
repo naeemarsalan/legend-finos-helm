@@ -5,13 +5,13 @@ data:
       "appName": "studio",
       "env": "test",
       "sdlc": {
-        "url": "http://{{ .Values.env.LEGEND_HOST }}/sdlc/api"
+        "url": "http://sdlc-{{ .Values.env.LEGEND_HOST }}/api"
       },
       "metadata": {
         "url": "__LEGEND_DEPOT_URL__/api"
       },
       "engine": {
-        "url": "http://{{ .Values.env.LEGEND_HOST }}/engine/api"
+        "url": "http://engine-{{ .Values.env.LEGEND_HOST }}/api"
       },
       "documentation": {
         "url": "https://legend.finos.org"

@@ -12,15 +12,15 @@ image:
 
 env:
   GITLAB_URL: "gitlab.com"
-  LEGEND_HOST: ""
-  GITLAB_OAUTH_CLIENT_ID: ""
-  GITLAB_OAUTH_SECRET: ""
+  LEGEND_HOST: "legend.arsalan.io"
+  GITLAB_OAUTH_CLIENT_ID: "38ad9d7f67567437ec3a637281021f1991d8a4c0e5705347cf81cbba48f54091"
+  GITLAB_OAUTH_SECRET: "bb05c6f6f9281c80e20c1688dcfdcd9d043455bd9692f4fb1b5141d0527c3212"
 
 clusterdns: "svc.cluster.local"
 
 sdlc:
   repository: "finos/legend-sdlc-server"
-  tag: "0.24.0"
+  tag: "0.45.0"
   port: "7070"
   type: ClusterIP
   env:
@@ -28,7 +28,7 @@ sdlc:
 
 engine:
   repository: "finos/legend-engine-server"
-  tag: "2.21.0"
+  tag: "2.39.0"
   port: "6060"
   type: ClusterIP
   env:
@@ -36,7 +36,7 @@ engine:
 
 studio:
   repository: "finos/legend-studio"
-  tag: "0.2.16"
+  tag: "0.2.5"
   port: "7070"
   type: ClusterIP
   env: "8080"

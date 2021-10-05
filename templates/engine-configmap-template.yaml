@@ -24,7 +24,7 @@ data:
       },
       "pac4j": {
         "callbackPrefix": "",
-        "mongoUri": "mongodb://{{ .Values.mongo.env.MONGO_USER }}:{{ .Values.mongo.env.MONGO_PASSWORD}}@{{ include "legend.fullname" . }}-mongo.{{ .Release.Namespace }}.{{ .Values.clusterdns}}:{{ .Values.mongo.port }}",
+        "mongoUri": "mongodb://__MONGO_USER__:__MONGO_PASSWORD__@__MONGO_HOST__:__MONGO_PORT__",
         "mongoDb": "legend",
         "bypassPaths": [
           "/api/server/v1/info"
@@ -33,9 +33,9 @@ data:
           {
             "org.finos.legend.server.pac4j.gitlab.GitlabClient": {
               "name": "gitlab",
-              "clientId": "{{ .Values.env.GITLAB_OAUTH_CLIENT_ID }}",
-              "secret": "{{ .Values.env.GITLAB_OAUTH_SECRET }}",
-              "discoveryUri": "https://{{ .Values.env.GITLAB_URL }}/.well-known/openid-configuration",
+              "clientId": "__GITLAB_OAUTH_CLIENT_ID__",
+              "secret": "__GITLAB_OAUTH_SECRET__",
+              "discoveryUri": "https://__GITLAB_URL__/.well-known/openid-configuration",
               "scope": "openid profile api"
             }
           }
@@ -55,7 +55,7 @@ data:
         }
       },
       "swagger": {
-        "title": "Legend Execution REST Services",
+        "title": "Legend Engine",
         "resourcePackage": "org.finos.legend",
         "uriPrefix": "/api"
       },
@@ -66,7 +66,7 @@ data:
         "connector": {
           "maxRequestHeaderSize": "32KiB",
           "type": "http",
-          "port": 6060
+          "port": __LEGEND_ENGINE_PORT__
         },
         "requestLog": {
           "appenders": [
@@ -86,4 +86,4 @@ metadata:
   labels:
     app: engine
     {{- include "legend.labels" . | nindent 4 }}
-  name: {{ include "legend.fullname" . }}-engine
+  name: {{ include "legend.fullname" . }}-engine-template

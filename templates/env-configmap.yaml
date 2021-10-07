@@ -7,13 +7,13 @@ data:
   GITLAB_URL: "{{ .Values.env.GITLAB_URL }}"
   LEGEND_SDLC_SERVICE_NAME: "sdlc"
   LEGEND_SDLC_PORT: "{{ .Values.sdlc.port }}"
-  LEGEND_SDLC_PUBLIC_URL: "http://sdlc-{{ .Values.env.LEGEND_HOST }}"
+  LEGEND_SDLC_PUBLIC_URL: "{{ .Values.env.HTTP_MODE }}://{{ .Values.env.LEGEND_HOST }}/sdlc"
   LEGEND_ENGINE_SERVICE_NAME: "engine"
   LEGEND_ENGINE_PORT: "{{ .Values.engine.port }}"
-  LEGEND_ENGINE_PUBLIC_URL: "http://engine-{{ .Values.env.LEGEND_HOST }}"
+  LEGEND_ENGINE_PUBLIC_URL: "{{ .Values.env.HTTP_MODE }}//{{ .Values.env.LEGEND_HOST }}/engine"
   LEGEND_STUDIO_SERVICE_NAME: "studio"
   LEGEND_STUDIO_PORT: "{{ .Values.studio.port }}"
-  LEGEND_STUDIO_PUBLIC_URL: "http://{{ .Values.env.LEGEND_HOST }}"
+  LEGEND_STUDIO_PUBLIC_URL: "{{ .Values.env.HTTP_MODE }}//{{ .Values.env.LEGEND_HOST }}"
 
 kind: ConfigMap
 metadata:

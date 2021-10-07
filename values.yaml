@@ -6,9 +6,10 @@ replicaCount: 1
 
 env:
   GITLAB_URL: "gitlab.com"
-  LEGEND_HOST: "*.nip.io"
+  LEGEND_HOST: ""
   GITLAB_OAUTH_CLIENT_ID: ""
   GITLAB_OAUTH_SECRET: ""
+  HTTP_MODE: "http" # https or http
 
 clusterdns: "svc.cluster.local"
 

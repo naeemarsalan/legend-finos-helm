@@ -61,7 +61,7 @@ data:
       },
       "server": {
         "type": "simple",
-        "applicationContextPath": "/",
+        "applicationContextPath": "/engine",
         "adminContextPath": "/admin",
         "connector": {
           "maxRequestHeaderSize": "32KiB",

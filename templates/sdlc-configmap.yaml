@@ -35,7 +35,7 @@ data:
 
     pac4j:
       callbackPrefix: /api/pac4j/login
-      mongoUri: mongodb://{{ .Values.mongo.env.MONGO_USER }}:{{ .Values.mongo.env.MONGO_PASSWORD | b64enc }}@{{ include "legend.fullname" . }}-mongo.{{ .Release.Namespace }}.{{ .Values.clusterdns}}:{{ .Values.mongo.port }}
+      mongoUri: mongodb://{{ .Values.mongo.env.MONGO_USER }}:{{ .Values.mongo.env.MONGO_PASSWORD }}@{{ include "legend.fullname" . }}-mongo.{{ .Release.Namespace }}.{{ .Values.clusterdns}}:{{ .Values.mongo.port }}
       mongoDb: legend
       clients:
         - org.finos.legend.server.pac4j.gitlab.GitlabClient:
@@ -60,7 +60,7 @@ data:
         app:
           id: {{ .Values.env.GITLAB_OAUTH_CLIENT_ID }}
           secret: {{ .Values.env.GITLAB_OAUTH_SECRET }}
-          redirectURI: http://{{ .Values.env.LEGEND_HOST }}/sdlc/api/auth/callback
+          redirectURI: http://{{ .Values.env.LEGEND_HOST }}/api/auth/callback
 
     projectStructure:
       extensionProvider:

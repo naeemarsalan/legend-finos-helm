@@ -5,8 +5,14 @@ metadata:
   labels:
     {{- include "legend.labels" . | nindent 4 }}
 spec:
+  {{ if eq .Values.env.HTTP_MODE "https"}}
+  tls:
+  - hosts:
+      - "{{ .Values.env.LEGEND_HOST }}"
+    secretName: {{ .Values.env.TLS_SECRET }}
+  {{ end }}
   rules:
-  - host: {{ .Values.env.LEGEND_HOST }}
+  - host: "{{ .Values.env.LEGEND_HOST }}"
     http:
       paths:
       - path: /

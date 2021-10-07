@@ -28,10 +28,10 @@ http://{HOST IP}.nip.io/studio/log.in/callback
 
 3. Install helm chart
 ```
-helm install test legend-finos-helm/ --set env.LEGEND_HOST="{HOST IP}.nip.io" 
-                                        --set env.GITLAB_OAUTH_CLIENT_ID="" 
-                                        --set env.GITLAB_OAUTH_SECRET="" 
-                                        --namespace legend
+helm install test legend-finos-helm/ --set env.LEGEND_HOST="{HOST IP}.nip.io" \
+                                        --set env.GITLAB_OAUTH_CLIENT_ID=""   \
+                                        --set env.GITLAB_OAUTH_SECRET=""      \
+                                        --namespace legend                    \
                                         --create-namespace
 ```
 3. Check pods are in running/ready state
@@ -58,12 +58,12 @@ kubectl create secret tls tls-legend --cert=fullchain.pem  --key=key.pem
 
 Install helm chart
 ```
-helm install test legend-finos-helm/ --set env.LEGEND_HOST="{DNS Hostname}" 
-                                        --set env.GITLAB_OAUTH_CLIENT_ID="" 
-                                        --set env.GITLAB_OAUTH_SECRET=""
-                                        --set env.HTTP_MODE="https"
-                                        --set env.TLS_SECRET="tls-legend"
-                                        --namespace legend
+helm install test legend-finos-helm/ --set env.LEGEND_HOST="{DNS Hostname}" \
+                                        --set env.GITLAB_OAUTH_CLIENT_ID="" \
+                                        --set env.GITLAB_OAUTH_SECRET=""    \
+                                        --set env.HTTP_MODE="https"         \
+                                        --set env.TLS_SECRET="tls-legend"   \
+                                        --namespace legend                  \
                                         --create-namespace
 ```
 

@@ -16,17 +16,24 @@ spec:
             name: {{ include "legend.fullname" . }}-studio
             port:
               number: {{ .Values.studio.port }}
-      - path: /sdlc
+  - host: sdlc-{{ .Values.env.LEGEND_HOST }}
+    http:
+      paths:
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: {{ include "legend.fullname" . }}-sdlc
             port:
               number: {{ .Values.sdlc.port }}
-      - path: /engine
+  - host: engine-{{ .Values.env.LEGEND_HOST }}
+    http:
+      paths:
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: {{ include "legend.fullname" . }}-engine
             port:
               number: {{ .Values.engine.port }}
+  

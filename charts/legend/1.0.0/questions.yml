@@ -35,12 +35,6 @@ questions:
   show_subquestion_if: https
   group: "Legend Settings"
   subquestions:
-  - variable: env.HTTP_MODE
-    default: https
-    description: "Specify http or https"
-    type: string
-    label: HTTP Mode
-    group: "Legend Settings"
   - variable: env.TLS_SECRET
     default: ""
     description: "Specify TLS Secret, create before installing chart."
